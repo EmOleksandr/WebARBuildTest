@@ -30,20 +30,13 @@
 <script src="Build/Build_001.loader.js"></script>
 <script>
   createUnityInstance(document.querySelector("#unity-canvas"), {
-    dataUrl: "Build/Build_001.data.gz",
-    frameworkUrl: "Build/Build_001.framework.js.gz",
-    codeUrl: "Build/Build_001.wasm.gz",
+    dataUrl: "Build/Build_001.data",
+    frameworkUrl: "Build/Build_001.framework.js",
+    codeUrl: "Build/Build_001.wasm",
     streamingAssetsUrl: "StreamingAssets",
     companyName: "DefaultCompany",
     productName: "Transparent WebGL",
-    productVersion: "0.1",
-    backgroundColor: "#00000000" // fully transparent
-    // matchWebGLToCanvasSize: false,
-    // devicePixelRatio: 1,
-  }).then((unityInstance) => {
-    console.log("Unity loaded");
-  }).catch((message) => {
-    console.error(message);
+    productVersion: "0.1"
   });
 </script>
 </body>
