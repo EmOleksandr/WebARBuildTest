@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes" />
+  <title>Unity WebGL Player | Transparent WebGL</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000; /* fallback background */
+    }
+
+    canvas#unity-canvas {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: transparent !important;
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+<canvas id="unity-canvas" tabindex="-1"></canvas>
+<script src="Build/Build_001.loader.js"></script>
+<script>
+  createUnityInstance(document.querySelector("#unity-canvas"), {
+    dataUrl: "Build/Build_001.data.gz",
+    frameworkUrl: "Build/Build_001.framework.js.gz",
+    codeUrl: "Build/Build_001.wasm.gz",
+    streamingAssetsUrl: "StreamingAssets",
+    companyName: "DefaultCompany",
+    productName: "Transparent WebGL",
+    productVersion: "0.1",
+    backgroundColor: "#00000000" // fully transparent
+    // matchWebGLToCanvasSize: false,
+    // devicePixelRatio: 1,
+  }).then((unityInstance) => {
+    console.log("Unity loaded");
+  }).catch((message) => {
+    console.error(message);
+  });
+</script>
+</body>
+</html>
