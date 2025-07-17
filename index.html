@@ -43,9 +43,15 @@
       <div id="unity-progress-bar-full"></div>
     </div>
   </div>
+  <div id="unity-footer">
+    <button id="entervr" value="Enter VR" disabled>VR</button>
+    <button id="enterar" value="Enter AR" disabled>AR</button>
+    <div id="unity-fullscreen-button">Fullscreen</div>
+  </div>
 </div>
 
 <script>
+  
   var buildUrl = "Build";
   var loaderUrl = buildUrl + "/Build_003.loader.js";
   var config = {
@@ -58,13 +64,35 @@
     productVersion: "0.1",
     webglContextAttributes: { alpha: true },  // Enable transparency
   };
-
+  
   var canvas = document.querySelector("#unity-canvas");
   var loadingBar = document.querySelector("#unity-loading-bar");
   var progressBarFull = document.querySelector("#unity-progress-bar-full");
   var fullscreenButton = document.querySelector("#unity-fullscreen-button");
   var unityInstance = null;
+  
+  if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+    // Mobile device style: fill the whole browser client area with the game canvas:
 
+    var meta = document.createElement('meta');
+    meta.name = 'viewport';
+    meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+    document.getElementsByTagName('head')[0].appendChild(meta);
+    container.className = "unity-mobile";
+    canvas.className = "unity-mobile";
+
+    // To lower canvas resolution on mobile devices to gain some
+    // performance, uncomment the following line:
+    // config.devicePixelRatio = 1;
+
+
+  } else {
+    // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
+
+    canvas.style.width = "1080px";
+    canvas.style.height = "1920px";
+  }
+  
   loadingBar.style.display = "block";
 
   var script = document.createElement("script");
@@ -75,13 +103,31 @@
     }).then((instance) => {
       unityInstance = instance;
       loadingBar.style.display = "none";
-      unityInstance.SetFullscreen(1);
-      unityInstance.Module.WebXR.toggleAR();
+      fullscreenButton.onclick = () => {
+        unityInstance.SetFullscreen(1);
+      };
     }).catch((message) => {
       alert(message);
     });
   };
   document.body.appendChild(script);
+
+  let enterARButton = document.getElementById('enterar');
+  let enterVRButton = document.getElementById('entervr');
+
+  document.addEventListener('onARSupportedCheck', function (event) {
+    enterARButton.disabled = !event.detail.supported;
+  });
+  document.addEventListener('onVRSupportedCheck', function (event) {
+    enterVRButton.disabled = !event.detail.supported;
+  });
+
+  enterARButton.addEventListener('click', function () {
+    unityInstance.Module.WebXR.toggleAR();
+  });
+  enterVRButton.addEventListener('click', function () {
+    unityInstance.Module.WebXR.toggleVR();
+  });
 </script>
 </body>
 </html>
