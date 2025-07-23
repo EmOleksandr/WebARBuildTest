@@ -2,36 +2,16 @@
 <html lang="en-us">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="description" content="">
+  <title>Unity WebGL Player | XR Interaction Toolkit</title>
+  <meta name="description" content="Complete interactive 3D scene demo made in Unity and exported to WebXR with the WebXR template of the Unity WebXR Export and Unity XR Interaction Toolkit">
   <link rel="shortcut icon" href="TemplateData/favicon.ico">
   <link rel="stylesheet" href="TemplateData/style.css">
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: #000; /* Solid background */
-    }
-    #unity-canvas {
-      background: #000; /* Solid background */
-      pointer-events: auto;
-      display: block;
-      width: 960px;       /* Fixed width */
-      height: 600px;      /* Fixed height */
-    }
-    #unity-container {
-      position: relative;  /* Avoid fullscreen fixed behavior */
-      width: 960px;
-      height: 600px;
-      margin: 0 auto;      /* Center horizontally */
-    }
-  </style>
 </head>
 <body>
 <div id="unity-container">
   <div id="unity-canvas-container">
-    <canvas id="unity-canvas"></canvas>
+    <canvas id="unity-canvas" style="width: 100%; height: 100%;"></canvas>
   </div>
   <div id="unity-loading-bar">
     <div id="unity-logo"></div>
@@ -44,10 +24,9 @@
     <button id="entervr" value="Enter VR" disabled>VR</button>
     <button id="enterar" value="Enter AR" disabled>AR</button>
     <div id="unity-webxr-link">Using <a href="https://github.com/De-Panther/unity-webxr-export" target="_blank" title="WebXR Export">WebXR Export</a></div>
-    <div id="unity-build-title">WebXRExport_PluginTest</div>
+    <div id="unity-build-title">XR Interaction Toolkit</div>
   </div>
 </div>
-
 <script>
   var buildUrl = "Build";
   var loaderUrl = buildUrl + "/Build_Clean.loader.js";
@@ -56,8 +35,8 @@
     frameworkUrl: buildUrl + "/Build_Clean.framework.js",
     codeUrl: buildUrl + "/Build_Clean.wasm",
     streamingAssetsUrl: "StreamingAssets",
-    companyName: "DefaultCompany",
-    productName: "WebXRExport_PluginTest",
+    companyName: "Sasha Em",
+    productName: "XR Interaction Toolkit",
     productVersion: "0.1",
   };
 
@@ -69,6 +48,9 @@
   var fullscreenButton = document.querySelector("#unity-fullscreen-button");
   var unityInstance = null;
 
+
+  canvasContainer.style.width = "700px";
+  canvasContainer.style.height = "400px";
   loadingBar.style.display = "block";
 
   var script = document.createElement("script");
@@ -79,7 +61,8 @@
     }).then((instance) => {
       unityInstance = instance;
       loadingBar.style.display = "none";
-      if (fullscreenButton) {
+      if (fullscreenButton)
+      {
         fullscreenButton.onclick = () => {
           unityInstance.SetFullscreen(1);
         };
