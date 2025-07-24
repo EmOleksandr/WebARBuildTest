@@ -21,20 +21,17 @@
         </div>
       </div>
       <div id="unity-footer">
-        <div id="unity-webgl-logo"></div>
         <button id="entervr" value="Enter VR" disabled>VR</button>
         <button id="enterar" value="Enter AR" disabled>AR</button>
-        <div id="unity-webxr-link">Using <a href="https://github.com/De-Panther/unity-webxr-export" target="_blank" title="WebXR Export">WebXR Export</a></div>
-        <div id="unity-build-title">Unity2022.2 WebXR Export</div>
       </div>
     </div>
     <script>
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/Example_CleanURP.loader.js";
+      var loaderUrl = buildUrl + "/Example_CleanURP_NoBG.loader.js";
       var config = {
-        dataUrl: buildUrl + "/Example_CleanURP.data",
-        frameworkUrl: buildUrl + "/Example_CleanURP.framework.js",
-        codeUrl: buildUrl + "/Example_CleanURP.wasm",
+        dataUrl: buildUrl + "/Example_CleanURP_NoBG.data",
+        frameworkUrl: buildUrl + "/Example_CleanURP_NoBG.framework.js",
+        codeUrl: buildUrl + "/Example_CleanURP_NoBG.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "De-Panther",
         productName: "Unity2022.2 WebXR Export",
